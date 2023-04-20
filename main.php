@@ -8,4 +8,8 @@ $currency = readline("Please enter code for a currency that you want to exchange
 
 $currencyConverter = new App\CurrencyConverter();
 
-echo "You entered " . $amount . " of euros you wanted to convert to " . $currency . ". The amount you get is " . $currencyConverter->currencyConverter($currency, $amount);
+$result = $currencyConverter->currencyConverter($currency, $amount);
+
+echo "You entered " . $amount . " of euros you wanted to convert to " . $currency . PHP_EOL;
+echo "The exchange rate for " . $currency . " is " . $result['rate'] . " and the conversion was done on " . $result['date'] . PHP_EOL;
+echo "The amount you get is " . $result['amount'] . PHP_EOL;

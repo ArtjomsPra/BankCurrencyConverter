@@ -10,14 +10,16 @@ class CurrencyConverter {
         $this->apiClient = new ApiClient();
     }
 
-    public function currencyConverter(string $currency, float $amount) : float {
+    public function currencyConverter(string $currency, float $amount) : array {
         $currencies = $this->apiClient->getExchangeRates();
-            $exchangeRate = 0;
+        $exchangeRate = 0;
+        $date = date('d.m.Y');
         foreach ($currencies->Currencies->Currency as $convertingCurrency) {
             if ($convertingCurrency->ID == $currency) {
                 $exchangeRate = $convertingCurrency->Rate;
             }
         }
-        return $amount * $exchangeRate;
+        $convertedAmount = $amount * $exchangeRate;
+        return ['amount' => $convertedAmount, 'rate' => $exchangeRate, 'date' => $date];
     }
 }
